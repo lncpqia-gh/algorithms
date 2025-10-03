@@ -38,11 +38,7 @@ int main() {
       positionVec.push_back(i);
     }
   }
-  // test: displaying contents
-  std::cout << "init done, contents of positionVec: " << std::endl;
-  for (unsigned i = 0; i < positionVec.size(); i++) {
-    std::cout << positionVec[i] << std::endl;
-  }
+
   currChar = findString.at(1);
   for (unsigned i = 1; i < findString.size(); i++) {
     std::cout << "i is " << i << std::endl;
@@ -55,13 +51,27 @@ int main() {
       }
     }
   }
-  // test: displaying contents
-  for (unsigned i = 0; i < positionVec.size(); i++) {
-    std::cout << positionVec[i] << std::endl;
-  }
-
+  
+  std::cout << positionVec.size() << " instance";
+  if (positionVec.size() != 1) std::cout << "s";
+  std::cout << " of " << findString << " found."  << std::endl;
   // show first find (string is in caps) with trailing characters on left and right
   // prompt: user to choose new string
   //         user to choose to go left
   //         user to choose to go right
+  int positionIndex = 0;
+  std::cout << "...";
+  // important cases: when trailing characters are at begin or end of string
+  int trailCount = 0;
+  int backTrailIndex;
+  std::string backTrailString;
+  while (trailCount < 15) {
+    if (textString.at(positionVec.at(positionIndex)) == textString.at(0)) break;
+    trailCount++;
+  }
+  backTrailIndex = positionVec.at(positionIndex) - trailCount;
+  for (int i = 0; i < trailCount; i++) {
+    std::cout << textString.at(backTrailIndex + i);
+  }
+  std::cout << findString;
 }
